@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEX MOBILE — Магазин</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page">
+
+<div class="bg-animation"></div>
+
+<header>
+  <div class="logo">APEX</div>
+  <nav>
+    <ul>
+      <!-- Главная — мы уже на ней, можно без data-nav -->
+      <li><a href="{% url 'home' %}">Главная</a></li>
+
+      <!-- Переход на каталог с fade -->
+      <li><a href="{% url 'products' %}" data-nav>Каталог</a></li>
+
+      <!-- Якоря на этой же странице (smooth-scroll) -->
+      <li><a href="#features">Преимущества</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>
+        Новая эра<br>
+        <span class="gradient-text">мобильных</span><br>
+        технологий
+      </h1>
+
+      <p>Откройте для себя флагманские смартфоны — всё добавляется через админку.</p>
+
+      <div class="cta-buttons">
+        <a href="{% url 'products' %}" class="btn btn-primary" data-nav>Смотреть каталог</a>
+        <a href="#features" class="btn btn-secondary">Узнать больше</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="phone-showcase">
+        <div class="phone-card">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="status-bar">
+                <span>9:41</span>
+                <span>5G ●●●●</span>
+              </div>
+              <div class="app-grid">
+                <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+                <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- На главной показываем только 3 новых (это в views.py) -->
+<section class="products" id="products">
+  <h2 class="section-title scroll-reveal">Новые модели</h2>
+
+  <div class="product-grid">
+    {% for product in products %}
+      <div class="product-card scroll-reveal product-card--compact">
+        <div class="product-image">
+          <span class="product-badge">NEW</span>
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% else %}
+            📱
+          {% endif %}
+        </div>
+
+        <h3 class="product-name">{{ product.name }}</h3>
+
+        <p class="product-desc product-desc--clamp">
+          {{ product.description }}
+        </p>
+
+        <div class="product-specs product-specs--compact">
+          {% for spec in product.specifications.all|slice:":3" %}
+            <span class="spec-tag">{{ spec.value }}</span>
+          {% empty %}
+            <span class="spec-tag">Без характеристик</span>
+          {% endfor %}
+        </div>
+
+        <div class="product-price">{{ product.price|floatformat:0 }} ₽</div>
+
+        <div class="product-actions">
+          <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-small" data-nav>Купить</a>
+        </div>
+      </div>
+    {% empty %}
+      <div class="product-card scroll-reveal product-card--compact">
+        <div class="product-image">
+          <span class="product-badge">EMPTY</span> 📱
+        </div>
+        <h3 class="product-name">Новинок пока нет</h3>
+        <p class="product-desc product-desc--clamp">
+          Добавь товары в админке и поставь галочку <b>is_new</b>.
+        </p>
+        <div class="product-specs product-specs--compact">
+          <span class="spec-tag">admin</span>
+          <span class="spec-tag">Product</span>
+          <span class="spec-tag">is_new</span>
+        </div>
+        <div class="product-price">—</div>
+        <div class="product-actions">
+          <a href="/admin/" class="btn btn-primary btn-small">Админка</a>
+          <a href="{% url 'products' %}" class="btn btn-secondary btn-small" data-nav>В каталог</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div style="max-width:1400px;margin:2.2rem auto 0;text-align:center;">
+    <a href="{% url 'products' %}" class="btn btn-secondary" data-nav>Смотреть весь каталог</a>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <h2 class="section-title scroll-reveal">Почему выбирают нас</h2>
+  <div class="features-grid">
+    <div class="feature-card scroll-reveal">
+      <div class="feature-icon">🚀</div>
+      <h3 class="feature-title">Быстрая доставка</h3>
+      <p class="feature-desc">Доставим ваш смартфон быстро и аккуратно.</p>
+    </div>
+    <div class="feature-card scroll-reveal">
+      <div class="feature-icon">🛡️</div>
+      <h3 class="feature-title">Гарантия</h3>
+      <p class="feature-desc">Официальная гарантия и поддержка.</p>
+    </div>
+    <div class="feature-card scroll-reveal">
+      <div class="feature-icon">💎</div>
+      <h3 class="feature-title">Оригинал</h3>
+      <p class="feature-desc">Только оригинальная продукция.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="#" class="social-link">📧</a>
+      <a href="#" class="social-link">📱</a>
+      <a href="#" class="social-link">🌐</a>
+    </div>
+    <p class="copyright">© {% now "Y" %} APEX MOBILE</p>
+  </div>
+</footer>
+
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>

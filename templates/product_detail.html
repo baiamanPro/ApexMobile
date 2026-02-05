@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ product.name }} — APEX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="page">
+
+<div class="bg-animation"></div>
+
+<header>
+  <div class="logo">APEX</div>
+  <nav>
+    <ul>
+      <li><a href="{% url 'home' %}" data-nav>Главная</a></li>
+      <li><a href="{% url 'products' %}" data-nav>Каталог</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="products" style="padding-top:8rem;">
+  <h2 class="section-title scroll-reveal">
+    <span class="gradient-text">{{ product.name }}</span>
+  </h2>
+
+  <div class="product-grid" style="grid-template-columns: 1fr; max-width: 900px;">
+    <div class="product-card scroll-reveal">
+      <div class="product-image" style="height:320px;">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+          📱
+        {% endif %}
+      </div>
+
+      <div class="product-price" style="margin-top:.4rem;">{{ product.price|floatformat:0 }} ₽</div>
+
+      <p class="product-desc" style="margin-top:.6rem;">
+        {{ product.description }}
+      </p>
+
+      <div class="product-specs" style="margin-top:1rem;">
+        {% for spec in product.specifications.all %}
+          <span class="spec-tag">{{ spec.value }}</span>
+        {% empty %}
+          <span class="spec-tag">Без характеристик</span>
+        {% endfor %}
+      </div>
+
+      <div class="product-actions" style="margin-top:1.4rem;">
+        <a href="{% url 'products' %}" class="btn btn-secondary btn-small" data-nav>Назад</a>
+        <a href="#contact" class="btn btn-primary btn-small">Купить</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="#" class="social-link">📧</a>
+      <a href="#" class="social-link">📱</a>
+      <a href="#" class="social-link">🌐</a>
+    </div>
+    <p class="copyright">© {% now "Y" %} APEX MOBILE</p>
+  </div>
+</footer>
+
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>
