@@ -20,55 +20,12 @@
       <li><a href="{% url 'home' %}">Главная</a></li>
 
       <!-- Переход на каталог с fade -->
-      <li><a href="{% url 'products' %}" data-nav>Каталог</a></li>
 
       <!-- Якоря на этой же странице (smooth-scroll) -->
-      <li><a href="#features">Преимущества</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
   </nav>
 </header>
-
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>
-        Новая эра<br>
-        <span class="gradient-text">мобильных</span><br>
-        технологий
-      </h1>
-
-      <p>Откройте для себя флагманские смартфоны — всё добавляется через админку.</p>
-
-      <div class="cta-buttons">
-        <a href="{% url 'products' %}" class="btn btn-primary" data-nav>Смотреть каталог</a>
-        <a href="#features" class="btn btn-secondary">Узнать больше</a>
-      </div>
-    </div>
-
-    <div class="hero-image">
-      <div class="phone-showcase">
-        <div class="phone-card">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="phone-content">
-              <div class="status-bar">
-                <span>9:41</span>
-                <span>5G ●●●●</span>
-              </div>
-              <div class="app-grid">
-                <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
-                <div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div><div class="app-icon"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 <!-- На главной показываем только 3 новых (это в views.py) -->
 <section class="products" id="products">
   <h2 class="section-title scroll-reveal">Новые модели</h2>
@@ -129,28 +86,6 @@
   </div>
 
   <div style="max-width:1400px;margin:2.2rem auto 0;text-align:center;">
-    <a href="{% url 'products' %}" class="btn btn-secondary" data-nav>Смотреть весь каталог</a>
-  </div>
-</section>
-
-<section class="features" id="features">
-  <h2 class="section-title scroll-reveal">Почему выбирают нас</h2>
-  <div class="features-grid">
-    <div class="feature-card scroll-reveal">
-      <div class="feature-icon">🚀</div>
-      <h3 class="feature-title">Быстрая доставка</h3>
-      <p class="feature-desc">Доставим ваш смартфон быстро и аккуратно.</p>
-    </div>
-    <div class="feature-card scroll-reveal">
-      <div class="feature-icon">🛡️</div>
-      <h3 class="feature-title">Гарантия</h3>
-      <p class="feature-desc">Официальная гарантия и поддержка.</p>
-    </div>
-    <div class="feature-card scroll-reveal">
-      <div class="feature-icon">💎</div>
-      <h3 class="feature-title">Оригинал</h3>
-      <p class="feature-desc">Только оригинальная продукция.</p>
-    </div>
   </div>
 </section>
 
