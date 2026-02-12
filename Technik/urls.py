@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("main.urls")),         # главная на /
-    path("main/", include("main.urls")),    # и дубль на /main/ (можешь удалить, если не надо)
+    path("", include("main.urls"), name="home"),
+    path('', include('users.urls')),
 ]
 
 if settings.DEBUG:

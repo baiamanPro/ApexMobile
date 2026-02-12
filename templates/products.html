@@ -16,22 +16,18 @@
   <div class="logo">APEX</div>
   <nav>
     <ul>
-      <!-- Главная — мы уже на ней, можно без data-nav -->
       <li><a href="{% url 'home' %}">Главная</a></li>
 
-      <!-- Переход на каталог с fade -->
 
-      <!-- Якоря на этой же странице (smooth-scroll) -->
       <li><a href="#contact">Контакты</a></li>
     </ul>
   </nav>
 </header>
-<!-- На главной показываем только 3 новых (это в views.py) -->
 <section class="products" id="products">
   <h2 class="section-title scroll-reveal">Новые модели</h2>
 
   <div class="product-grid">
-    {% for product in products %}
+    {% for product in my_paginator %}
       <div class="product-card scroll-reveal product-card--compact">
         <div class="product-image">
           <span class="product-badge">NEW</span>
@@ -86,7 +82,35 @@
   </div>
 
   <div style="max-width:1400px;margin:2.2rem auto 0;text-align:center;">
+    {% if my_paginator.paginator.num_pages > 1 %}
+      <nav class="pagination" aria-label="Pagination">
+
+        {% if my_paginator.has_previous %}
+          <a class="pagination__item pagination__nav" href="?page={{ my_paginator.previous_page_number }}">‹</a>
+        {% else %}
+          <span class="pagination__item pagination__nav is-disabled">‹</span>
+        {% endif %}
+
+        {% for page in page_range %}
+          {% if page == "…" %}
+            <span class="pagination__item pagination__ellipsis">…</span>
+          {% elif page == my_paginator.number %}
+            <span class="pagination__item is-active" aria-current="page">{{ page }}</span>
+          {% else %}
+            <a class="pagination__item" href="?page={{ page }}">{{ page }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if my_paginator.has_next %}
+          <a class="pagination__item pagination__nav" href="?page={{ my_paginator.next_page_number }}">›</a>
+        {% else %}
+          <span class="pagination__item pagination__nav is-disabled">›</span>
+        {% endif %}
+
+      </nav>
+    {% endif %}
   </div>
+
 </section>
 
 <footer id="contact">

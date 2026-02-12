@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация — APEX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="page auth-page">
+  <div class="bg-animation"></div>
+
+  <header>
+    <div class="logo">APEX</div>
+  </header>
+
+  <main class="auth-layout">
+    <div class="auth-card">
+      <h2 class="auth-title">Регистрация</h2>
+
+      <form method="POST" class="auth-form">
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="auth-field">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <div class="auth-help">{{ field.help_text }}</div>
+            {% endif %}
+            {% if field.errors %}
+              <div class="auth-error">{{ field.errors }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary auth-btn">Создать аккаунт</button>
+      </form>
+
+      <div class="auth-footer">
+        Уже есть аккаунт?
+        <a class="auth-link" href="{% url 'login' %}">Войти</a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

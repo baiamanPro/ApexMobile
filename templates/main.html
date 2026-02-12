@@ -16,15 +16,14 @@
   <div class="logo">APEX</div>
   <nav>
     <ul>
-      <!-- Главная — мы уже на ней, можно без data-nav -->
       <li><a href="{% url 'home' %}">Главная</a></li>
 
-      <!-- Переход на каталог с fade -->
       <li><a href="{% url 'products' %}" data-nav>Каталог</a></li>
 
-      <!-- Якоря на этой же странице (smooth-scroll) -->
       <li><a href="#features">Преимущества</a></li>
       <li><a href="#contact">Контакты</a></li>
+      <a href="/register/" >👤Register</a>
+
     </ul>
   </nav>
 </header>
@@ -69,7 +68,6 @@
   </div>
 </section>
 
-<!-- На главной показываем только 3 новых (это в views.py) -->
 <section class="products" id="products">
   <h2 class="section-title scroll-reveal">Новые модели</h2>
 

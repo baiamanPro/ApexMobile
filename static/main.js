@@ -1,4 +1,3 @@
-// ===== Scroll reveal animation =====
 (() => {
   const items = document.querySelectorAll(".scroll-reveal");
   if (!items.length) return;
@@ -17,7 +16,6 @@
   items.forEach((el) => observer.observe(el));
 })();
 
-// ===== Smooth scroll for anchors (#) =====
 (() => {
   document.addEventListener("click", (e) => {
     const a = e.target.closest('a[href^="#"]');
@@ -34,7 +32,6 @@
   });
 })();
 
-// ===== Product card hover =====
 (() => {
   const cards = document.querySelectorAll(".product-card");
   cards.forEach((card) => {
@@ -43,24 +40,19 @@
   });
 })();
 
-// ===== Smooth page transitions (FIXED) =====
 (() => {
   const page = document.body;
 
-  // гарантируем классы
   page.classList.add("page");
 
-  // fade-in
   window.addEventListener("DOMContentLoaded", () => {
     page.classList.remove("is-entering");
   });
 
-  // 🔥 ПЕРЕХВАТ ТОЛЬКО НУЖНЫХ ССЫЛОК
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a[data-nav]");
     if (!a) return;
 
-    // разрешаем спец-клики
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
 
     e.preventDefault();
@@ -76,9 +68,13 @@
     }, duration);
   });
 
-  // back / forward
   window.addEventListener("pageshow", () => {
     page.classList.remove("is-leaving");
     page.classList.remove("is-entering");
   });
 })();
+window.addEventListener("load", () => {
+  document.querySelectorAll(".scroll-reveal").forEach((el) => {
+    el.classList.add("active");
+  });
+});
