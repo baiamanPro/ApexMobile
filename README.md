@@ -114,6 +114,6 @@ http://127.0.0.1:8000/
 
 ## 👨‍💻 Автор
 
-**Байаман Кубатов**
+**bananPro**
 
 GitHub: [https://github.com/baiamanPro](https://github.com/baiamanPro)
